@@ -1,7 +1,15 @@
-package com.connectify.Connectify_BackEnd.Models;
+package com.connectify.Connectify_BackEnd.Model;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
     private Integer id;
     private String firstName;
     private String lastName;
@@ -10,7 +18,6 @@ public class User {
 
     public User()
     {
-        //
     }
 
     public User(Integer id, String firstName, String lastName, String email, String password) {
