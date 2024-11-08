@@ -2,6 +2,7 @@ package com.connectify.Connectify_BackEnd.Controller;
 
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.UserRepository;
+import com.connectify.Connectify_BackEnd.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +16,13 @@ public class UserController {
     @Autowired
      UserRepository userRepository;
 
-    @PostMapping
+    @Autowired
+    UserService userService;
+
+    @PostMapping("/createUser")
     public User createUser(@RequestBody User user)
     {
-        User saveUser= userRepository.save(user);
+        User saveUser= userService.registerUser(user);
         return saveUser;
     }
 
@@ -33,55 +37,28 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public User getUserById(@PathVariable Integer userId) throws Exception {
-        Optional<User> user=userRepository.findById(userId);
-
-        if(user.isPresent())
-        {
-            return user.get();
-        }
-        throw new Exception("user does not exit with userid "+userId);
+        User user=userService.findUserById(userId);
+       return user;
     }
 
 
 
     @PutMapping("/{userId}")
     public User updateUser(@RequestBody User user,@PathVariable Integer userId) throws Exception {
-        Optional<User> user1=userRepository.findById(userId);
-
-        if(user1.isEmpty())
-        {
-            throw new Exception("user does not exist with "+userId);
-        }
-        User oldUser=user1.get();
-        if(user.getFirstName()!=null)
-        {
-            oldUser.setFirstName(user.getFirstName());
-        }
-        if(user.getLastName()!=null)
-        {
-            oldUser.setLastName(user.getLastName());
-        }
-        if(user.getEmail()!=null)
-        {
-            oldUser.setEmail(user.getEmail());
-        }
-        User updateUser=userRepository.save(oldUser);
-
-        return updateUser;
+        User saveUser=userService.updateUser(user,userId);
+        return saveUser;
     }
 
-    @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable Integer userId) throws Exception {
-        Optional<User> user1=userRepository.findById(userId);
+    @PutMapping("/follow/{userId1}/{userId2}")
+    public User followUserHandler(@PathVariable Integer userId1,@PathVariable Integer userId2) throws Exception {
+        User followUser=userService.followUser(userId1,userId2);
+        return followUser;
+    }
 
-        if(user1.isEmpty())
-        {
-            throw new Exception("user does not exist with "+userId);
-        }
-        User oldUser=user1.get();
-
-        userRepository.delete(oldUser);
-
-        return "user deleted successfully with id "+userId;
+    @GetMapping("/search")
+    public List<User> searchUser(@RequestParam("query") String query)
+    {
+        List<User> users=userService.searchUser(query);
+        return users;
     }
 }
