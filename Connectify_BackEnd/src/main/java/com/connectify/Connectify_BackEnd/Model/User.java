@@ -1,9 +1,7 @@
 package com.connectify.Connectify_BackEnd.Model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String firstName;
     private String lastName;
@@ -23,12 +22,14 @@ public class User {
 
     private List<Integer> followings= new ArrayList<>();
 
+    private List<Integer> savedPost= new ArrayList<>();
+
     private String gender;
     public User()
     {
     }
 
-    public User(Integer id, String firstName, String lastName, String email, String password, List<Integer> followers, List<Integer> followings, String gender) {
+    public User(Integer id, String firstName, String lastName, String email, String password, List<Integer> followers, List<Integer> followings,  List<Integer> savedPost ,String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,6 +38,7 @@ public class User {
         this.followers = followers;
         this.followings = followings;
         this.gender = gender;
+        this.savedPost=savedPost;
     }
 
 
@@ -103,5 +105,13 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public List<Integer> getSavedPost() {
+        return savedPost;
+    }
+
+    public void setSavedPost(List<Integer> savedPost) {
+        this.savedPost = savedPost;
     }
 }
