@@ -1,6 +1,7 @@
 package com.connectify.Connectify_BackEnd.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -22,14 +23,16 @@ public class User {
 
     private List<Integer> followings= new ArrayList<>();
 
-    private List<Integer> savedPost= new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany
+    private List<Post> savedPost= new ArrayList<>();
 
     private String gender;
     public User()
     {
     }
 
-    public User(Integer id, String firstName, String lastName, String email, String password, List<Integer> followers, List<Integer> followings,  List<Integer> savedPost ,String gender) {
+    public User(Integer id, String firstName, String lastName, String email, String password, List<Integer> followers, List<Integer> followings,  List<Post> savedPost ,String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -107,11 +110,11 @@ public class User {
         this.gender = gender;
     }
 
-    public List<Integer> getSavedPost() {
+    public List<Post> getSavedPost() {
         return savedPost;
     }
 
-    public void setSavedPost(List<Integer> savedPost) {
+    public void setSavedPost(List<Post> savedPost) {
         this.savedPost = savedPost;
     }
 }

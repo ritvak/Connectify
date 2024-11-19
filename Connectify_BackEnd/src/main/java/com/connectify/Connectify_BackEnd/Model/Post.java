@@ -1,15 +1,13 @@
 package com.connectify.Connectify_BackEnd.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "posts")
 public class Post {
 
     @Id
@@ -22,10 +20,12 @@ public class Post {
 
     private String video;
 
+    @ManyToOne
     private User user;
 
     private LocalDateTime createdAt;
 
+    @OneToMany
     private List<User> liked=new ArrayList<>();
 
     public Post()

@@ -35,6 +35,8 @@ public class PostServiceImplementation implements PostService {
         User user=userService.findUserById(userId);
         newPost.setUser(user);
 
+        postRepository.save(newPost);
+
         return newPost;
     }
 
@@ -84,7 +86,7 @@ public class PostServiceImplementation implements PostService {
             user.getSavedPost().remove(post);
         }
         else {
-            user.getSavedPost().remove(post);
+            user.getSavedPost().add(post);
         }
         userRepository.save(user);
        return post;
