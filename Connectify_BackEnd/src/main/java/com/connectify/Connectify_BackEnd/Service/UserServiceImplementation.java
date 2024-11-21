@@ -1,5 +1,6 @@
 package com.connectify.Connectify_BackEnd.Service;
 
+import com.connectify.Connectify_BackEnd.Config.JwtProvider;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,18 +38,18 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public User followUser(Integer userId1, Integer userId2) throws Exception {
-        User user1=findUserById(userId1);
+    public User followUser(Integer resUserId, Integer userId2) throws Exception {
+        User reqUser=findUserById(resUserId);
 
         User user2=findUserById(userId2);
 
-        user2.getFollowers().add(user1.getId());
-        user1.getFollowings().add(user2.getId());
+        user2.getFollowers().add(reqUser.getId());
+        reqUser.getFollowings().add(user2.getId());
 
-        userRepository.save(user1);
+        userRepository.save(reqUser);
         userRepository.save(user2);
 
-        return user1;
+        return reqUser;
     }
 
     @Override
@@ -72,6 +73,10 @@ public class UserServiceImplementation implements UserService{
         {
             oldUser.setEmail(user.getEmail());
         }
+        if(user.getGender()!=null)
+        {
+            oldUser.setGender(user.getGender());
+        }
         User updateUser=userRepository.save(oldUser);
 
         return updateUser;
@@ -81,5 +86,12 @@ public class UserServiceImplementation implements UserService{
     public List<User> searchUser(String query) {
         return userRepository.searchUser(query);
 
+    }
+    @Override
+    public User findUserByJwt(String jwt) {
+
+        String email= JwtProvider.getEmailFromJwtToken(jwt);
+        User user=userRepository.findByEmail(email);
+        return user;
     }
 }
