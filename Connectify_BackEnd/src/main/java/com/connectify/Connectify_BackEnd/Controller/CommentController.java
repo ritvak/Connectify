@@ -4,7 +4,6 @@ import com.connectify.Connectify_BackEnd.Model.Comment;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Service.CommentService;
 import com.connectify.Connectify_BackEnd.Service.UserService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

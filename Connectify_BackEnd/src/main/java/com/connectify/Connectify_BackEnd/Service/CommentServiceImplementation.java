@@ -4,7 +4,7 @@ import com.connectify.Connectify_BackEnd.Model.Comment;
 import com.connectify.Connectify_BackEnd.Model.Post;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.PostRepository;
-import com.connectify.Connectify_BackEnd.Response.CommentRepository;
+import com.connectify.Connectify_BackEnd.Repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
