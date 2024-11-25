@@ -21,7 +21,7 @@ public class PostServiceImplementation implements PostService {
     UserService userService;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public Post createNewPost(Post post, Integer userId) throws Exception {

@@ -1,4 +1,4 @@
-package com.connectify.Connectify_BackEnd.Response;
+package com.connectify.Connectify_BackEnd.Request;
 
 public class LoginRequest {
 

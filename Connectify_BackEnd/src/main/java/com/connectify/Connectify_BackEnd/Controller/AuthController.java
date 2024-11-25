@@ -2,9 +2,10 @@ package com.connectify.Connectify_BackEnd.Controller;
 
 import com.connectify.Connectify_BackEnd.Config.JwtProvider;
 import com.connectify.Connectify_BackEnd.Model.User;
+import com.connectify.Connectify_BackEnd.Repository.PostRepository;
 import com.connectify.Connectify_BackEnd.Repository.UserRepository;
+import com.connectify.Connectify_BackEnd.Request.LoginRequest;
 import com.connectify.Connectify_BackEnd.Response.AuthResponse;
-import com.connectify.Connectify_BackEnd.Response.LoginRequest;
 import com.connectify.Connectify_BackEnd.Service.CustomerUserDetailsService;
 import com.connectify.Connectify_BackEnd.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

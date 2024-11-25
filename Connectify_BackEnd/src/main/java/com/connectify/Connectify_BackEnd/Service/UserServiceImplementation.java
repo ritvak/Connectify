@@ -2,6 +2,7 @@ package com.connectify.Connectify_BackEnd.Service;
 
 import com.connectify.Connectify_BackEnd.Config.JwtProvider;
 import com.connectify.Connectify_BackEnd.Model.User;
+import com.connectify.Connectify_BackEnd.Repository.PostRepository;
 import com.connectify.Connectify_BackEnd.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class UserServiceImplementation implements UserService{
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public User registerUser(User user) {

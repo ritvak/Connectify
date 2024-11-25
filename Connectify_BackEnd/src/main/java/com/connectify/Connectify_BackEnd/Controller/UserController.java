@@ -1,20 +1,20 @@
 package com.connectify.Connectify_BackEnd.Controller;
 
 import com.connectify.Connectify_BackEnd.Model.User;
+import com.connectify.Connectify_BackEnd.Repository.PostRepository;
 import com.connectify.Connectify_BackEnd.Repository.UserRepository;
 import com.connectify.Connectify_BackEnd.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
 public class UserController {
 
     @Autowired
-     UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     UserService userService;

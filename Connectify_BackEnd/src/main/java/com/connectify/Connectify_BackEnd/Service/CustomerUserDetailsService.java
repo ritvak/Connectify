@@ -1,6 +1,7 @@
 package com.connectify.Connectify_BackEnd.Service;
 
 import com.connectify.Connectify_BackEnd.Model.User;
+import com.connectify.Connectify_BackEnd.Repository.PostRepository;
 import com.connectify.Connectify_BackEnd.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
