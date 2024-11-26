@@ -1,5 +1,6 @@
 package com.connectify.Connectify_BackEnd.Service;
 
+import com.connectify.Connectify_BackEnd.Exception.ChatException;
 import com.connectify.Connectify_BackEnd.Model.Chat;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.ChatRepository;
@@ -36,12 +37,12 @@ public class ChatServiceImplementation implements ChatService{
     }
 
     @Override
-    public Chat findChatById(Integer chatId) throws Exception {
+    public Chat findChatById(Integer chatId) throws ChatException {
         Optional<Chat> opt=chatRepository.findById(chatId);
 
         if(opt.isEmpty())
         {
-            throw new Exception("Chat does not exist with id "+ chatId);
+            throw new ChatException("Chat does not exist with id "+ chatId);
         }
         return opt.get();
     }

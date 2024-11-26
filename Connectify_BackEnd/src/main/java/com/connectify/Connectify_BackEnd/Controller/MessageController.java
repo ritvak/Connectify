@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Controller;
 
+import com.connectify.Connectify_BackEnd.Exception.ChatException;
+import com.connectify.Connectify_BackEnd.Exception.MessageException;
 import com.connectify.Connectify_BackEnd.Model.Message;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Service.MessageService;
@@ -19,14 +21,14 @@ public class MessageController {
     private UserService userService;
 
     @PostMapping("/api/messages/chat/{chatId}")
-    public Message createMessage(@RequestBody Message req, @RequestHeader("Authorization")String jwt, @PathVariable Integer chatId) throws Exception {
+    public Message createMessage(@RequestBody Message req, @RequestHeader("Authorization")String jwt, @PathVariable Integer chatId) throws MessageException, ChatException {
         User reqUser=userService.findUserByJwt(jwt);
         Message message=messageService.createMessage(reqUser,chatId,req);
         return message;
     }
 
     @GetMapping("/api/messages/chat/{chatId}")
-    public List<Message> findChatsMessages( @RequestHeader("Authorization")String jwt,@PathVariable Integer chatId) throws Exception {
+    public List<Message> findChatsMessages( @RequestHeader("Authorization")String jwt,@PathVariable Integer chatId) throws MessageException, ChatException {
         User reqUser=userService.findUserByJwt(jwt);
         List<Message> messages=messageService.findChatsMessages(chatId);
         return messages;

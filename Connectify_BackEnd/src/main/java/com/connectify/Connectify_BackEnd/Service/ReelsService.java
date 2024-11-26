@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Service;
 
+import com.connectify.Connectify_BackEnd.Exception.ReelsException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Reels;
 import com.connectify.Connectify_BackEnd.Model.User;
 
@@ -11,6 +13,6 @@ public interface ReelsService {
 
     public List<Reels> findAllReels();
 
-    public List<Reels> findUsersReel(Integer userId) throws Exception;
+    public List<Reels> findUsersReel(Integer userId) throws ReelsException, UserException;
 
 }

@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Service;
 
+import com.connectify.Connectify_BackEnd.Exception.PostException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Post;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.PostRepository;
@@ -24,7 +26,7 @@ public class PostServiceImplementation implements PostService {
     private UserRepository userRepository;
 
     @Override
-    public Post createNewPost(Post post, Integer userId) throws Exception {
+    public Post createNewPost(Post post, Integer userId) throws PostException, UserException {
 
         Post newPost=new Post();
         newPost.setCaption(post.getCaption());
@@ -41,14 +43,14 @@ public class PostServiceImplementation implements PostService {
     }
 
     @Override
-    public String deletePost(Integer postId, Integer userId) throws Exception {
+    public String deletePost(Integer postId, Integer userId) throws PostException, UserException {
 
         Post post= findPostById(postId);
         User user=userService.findUserById(userId);
 
         if(post.getUser().getId()!=user.getId())
         {
-            throw new Exception("User not found with id "+userId);
+            throw new PostException("User not found with id "+userId);
         }
         postRepository.deleteById(postId);
         return "post deleted successfully" ;
@@ -60,13 +62,13 @@ public class PostServiceImplementation implements PostService {
     }
 
     @Override
-    public Post findPostById(Integer postId) throws Exception {
+    public Post findPostById(Integer postId) throws PostException {
 
         Optional<Post> opt=postRepository.findById(postId);
 
         if(opt.isEmpty())
         {
-            throw new Exception("post not found with id "+postId);
+            throw new PostException("post not found with id "+postId);
         }
         return opt.get();
     }
@@ -77,7 +79,7 @@ public class PostServiceImplementation implements PostService {
     }
 
     @Override
-    public Post savedPost(Integer postId, Integer userId) throws Exception {
+    public Post savedPost(Integer postId, Integer userId) throws PostException, UserException {
         Post post= findPostById(postId);
         User user=userService.findUserById(userId);
 
@@ -93,7 +95,7 @@ public class PostServiceImplementation implements PostService {
     }
 
     @Override
-    public Post likePost(Integer postId, Integer userId) throws Exception {
+    public Post likePost(Integer postId, Integer userId) throws PostException, UserException {
         Post post= findPostById(postId);
         User user=userService.findUserById(userId);
 

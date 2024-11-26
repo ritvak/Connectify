@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Service;
 
+import com.connectify.Connectify_BackEnd.Exception.ChatException;
+import com.connectify.Connectify_BackEnd.Exception.MessageException;
 import com.connectify.Connectify_BackEnd.Model.Chat;
 import com.connectify.Connectify_BackEnd.Model.Message;
 import com.connectify.Connectify_BackEnd.Model.User;
@@ -23,7 +25,7 @@ public class MessageServiceImplementation implements MessageService{
     @Autowired
     private ChatRepository chatRepository;
     @Override
-    public Message createMessage(User user, Integer chatId, Message req) throws Exception {
+    public Message createMessage(User user, Integer chatId, Message req) throws MessageException, ChatException {
 
         Chat chat=chatService.findChatById(chatId);
         Message message=new Message();
@@ -40,7 +42,7 @@ public class MessageServiceImplementation implements MessageService{
     }
 
     @Override
-    public List<Message> findChatsMessages(Integer chatId) throws Exception {
+    public List<Message> findChatsMessages(Integer chatId) throws MessageException, ChatException {
 
         Chat chat=chatService.findChatById(chatId);
 

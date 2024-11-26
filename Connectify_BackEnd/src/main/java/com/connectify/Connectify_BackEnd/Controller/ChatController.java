@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Controller;
 
+import com.connectify.Connectify_BackEnd.Exception.ChatException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Chat;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Request.CreateChatRequest;
@@ -20,7 +22,7 @@ public class ChatController {
     private UserService userService;
 
     @PostMapping("/api/chats")
-    public Chat createChat(@RequestHeader("Authorization") String jwt,@RequestBody CreateChatRequest req) throws Exception {
+    public Chat createChat(@RequestHeader("Authorization") String jwt,@RequestBody CreateChatRequest req) throws ChatException, UserException {
         User reqUser=userService.findUserByJwt(jwt);
         User user2=userService.findUserById(req.getUserId());
         Chat chat=chatService.createChat(reqUser,user2);

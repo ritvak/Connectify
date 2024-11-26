@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Controller;
 
+import com.connectify.Connectify_BackEnd.Exception.ReelsException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Reels;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Service.ReelsService;
@@ -33,7 +35,7 @@ public class ReelsController {
     }
 
     @GetMapping("/api/reels/user/{userId}")
-    public List<Reels> findReelByUser(@PathVariable Integer userId) throws Exception {
+    public List<Reels> findReelByUser(@PathVariable Integer userId) throws ReelsException, UserException {
         return reelsService.findUsersReel(userId);
     }
 

@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Controller;
 
+import com.connectify.Connectify_BackEnd.Exception.CommentException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Comment;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Service.CommentService;
@@ -25,7 +27,7 @@ public class CommentController {
     }
 
     @PutMapping("/api/comment/like/{commentId}")
-    public Comment likeComment(@RequestHeader("Authorization") String jwt, @PathVariable Integer commentId) throws Exception {
+    public Comment likeComment(@RequestHeader("Authorization") String jwt, @PathVariable Integer commentId) throws CommentException, UserException {
         User user=userService.findUserByJwt(jwt);
         Comment likedComment=commentService.likeComment(commentId,user.getId());
         return likedComment;

@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Controller;
 
+import com.connectify.Connectify_BackEnd.Exception.StoryException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Story;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Service.StoryService;
@@ -27,7 +29,7 @@ public class StoryController {
     }
 
     @GetMapping("/api/story/{userId}")
-    public List<Story> findUserStory(@PathVariable Integer userId, @RequestHeader("Authorization") String jwt) throws Exception {
+    public List<Story> findUserStory(@PathVariable Integer userId, @RequestHeader("Authorization") String jwt) throws StoryException, UserException {
         User reqUser=userService.findUserByJwt(jwt);
         List<Story> stories=storyService.findStoryByUserId(userId);
         return stories;

@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Service;
 
+import com.connectify.Connectify_BackEnd.Exception.StoryException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Story;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.StoryRepository;
@@ -29,7 +31,7 @@ public class StoryServiceImplementation implements StoryService{
     }
 
     @Override
-    public List<Story> findStoryByUserId(Integer userId) throws Exception {
+    public List<Story> findStoryByUserId(Integer userId) throws StoryException, UserException {
         User user=userService.findUserById(userId);
         return storyRepository.findByUserId(userId);
     }

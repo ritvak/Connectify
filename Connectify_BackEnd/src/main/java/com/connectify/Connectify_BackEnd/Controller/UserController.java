@@ -1,5 +1,6 @@
 package com.connectify.Connectify_BackEnd.Controller;
 
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.PostRepository;
 import com.connectify.Connectify_BackEnd.Repository.UserRepository;
@@ -31,7 +32,7 @@ public class UserController {
 
 
     @GetMapping("/api/users/{userId}")
-    public User getUserById(@PathVariable Integer userId) throws Exception {
+    public User getUserById(@PathVariable Integer userId) throws UserException {
         User user=userService.findUserById(userId);
        return user;
     }
@@ -39,14 +40,14 @@ public class UserController {
 
 
     @PutMapping("/api/users")
-    public User updateUser(@RequestHeader("Authorization") String jwt,@RequestBody User user) throws Exception {
+    public User updateUser(@RequestHeader("Authorization") String jwt,@RequestBody User user) throws UserException {
        User reqUser=userService.findUserByJwt(jwt);
         User saveUser=userService.updateUser(user, reqUser.getId());
         return saveUser;
     }
 
     @PutMapping("/api/users/follow/{userId2}")
-    public User followUserHandler(@RequestHeader("Authorization") String jwt,@PathVariable Integer userId2) throws Exception {
+    public User followUserHandler(@RequestHeader("Authorization") String jwt,@PathVariable Integer userId2) throws UserException {
         User reqUser=userService.findUserByJwt(jwt);
         User followUser=userService.followUser(reqUser.getId(), userId2);
         return followUser;

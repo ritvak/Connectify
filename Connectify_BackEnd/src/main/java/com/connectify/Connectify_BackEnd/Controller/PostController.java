@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Controller;
 
+import com.connectify.Connectify_BackEnd.Exception.PostException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Post;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Response.ApiResponse;
@@ -61,14 +63,14 @@ public class PostController {
     }
 
     @PutMapping("/api/posts/save/{postId}")
-    public ResponseEntity<Post> savedPost(@PathVariable Integer postId, @RequestHeader("Authorization") String jwt) throws Exception {
+    public ResponseEntity<Post> savedPost(@PathVariable Integer postId, @RequestHeader("Authorization") String jwt) throws PostException, UserException {
         User reqUser=userService.findUserByJwt(jwt);
         Post post=postService.savedPost(postId, reqUser.getId());
         return new ResponseEntity<Post>(post,HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/api/posts/like/{postId}")
-    public ResponseEntity<Post> likedPostHandler(@PathVariable Integer postId, @RequestHeader("Authorization") String jwt) throws Exception {
+    public ResponseEntity<Post> likedPostHandler(@PathVariable Integer postId, @RequestHeader("Authorization") String jwt) throws PostException, UserException {
         User reqUser=userService.findUserByJwt(jwt);
         Post post=postService.likePost(postId, reqUser.getId());
         return new ResponseEntity<Post>(post,HttpStatus.ACCEPTED);

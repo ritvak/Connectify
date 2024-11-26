@@ -1,5 +1,7 @@
 package com.connectify.Connectify_BackEnd.Service;
 
+import com.connectify.Connectify_BackEnd.Exception.ReelsException;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.Reels;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.ReelsRepository;
@@ -34,7 +36,7 @@ public class ReelsServiceImplementation implements ReelsService{
     }
 
     @Override
-    public List<Reels> findUsersReel(Integer userId) throws Exception {
+    public List<Reels> findUsersReel(Integer userId) throws ReelsException, UserException {
         userService.findUserById(userId);
         return reelsRepository.findByUserId(userId);
     }

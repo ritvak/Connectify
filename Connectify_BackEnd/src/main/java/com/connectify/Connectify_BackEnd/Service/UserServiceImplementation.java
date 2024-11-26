@@ -1,6 +1,7 @@
 package com.connectify.Connectify_BackEnd.Service;
 
 import com.connectify.Connectify_BackEnd.Config.JwtProvider;
+import com.connectify.Connectify_BackEnd.Exception.UserException;
 import com.connectify.Connectify_BackEnd.Model.User;
 import com.connectify.Connectify_BackEnd.Repository.PostRepository;
 import com.connectify.Connectify_BackEnd.Repository.UserRepository;
@@ -23,13 +24,13 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public User findUserById(Integer userId) throws Exception {
+    public User findUserById(Integer userId) throws UserException {
         Optional<User> user=userRepository.findById(userId);
         if(user.isPresent())
         {
             return user.get();
         }
-        throw new Exception("user does not exit with userid "+userId);
+        throw new UserException("user does not exit with userid "+userId);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public User followUser(Integer resUserId, Integer userId2) throws Exception {
+    public User followUser(Integer resUserId, Integer userId2) throws UserException {
         User reqUser=findUserById(resUserId);
 
         User user2=findUserById(userId2);
@@ -54,12 +55,12 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public User updateUser(User user,Integer userId) throws Exception {
+    public User updateUser(User user,Integer userId) throws UserException {
         Optional<User> user1=userRepository.findById(userId);
 
         if(user1.isEmpty())
         {
-            throw new Exception("user does not exist with "+userId);
+            throw new UserException("user does not exist with "+userId);
         }
         User oldUser=user1.get();
         if(user.getFirstName()!=null)
