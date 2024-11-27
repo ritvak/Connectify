@@ -18,9 +18,9 @@ const Authentication = () => {
                 <h1 className='logo text-center'>Connectify</h1>
                 <p className='text-center text-sm-w-[70&]'>Connecting Lives, Sharing Stories: Your Social World</p>
                 </div>
-               {/* <Login/> */}
+               <Login/>
 
-               <Register/>
+               {/* <Register/> */}
                </Card>
             </div>
 
